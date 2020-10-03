@@ -17,6 +17,7 @@ class YoutubeVideo(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True)
 
 class LectureNote(models.Model):
+    title = models.CharField(max_length=80,default="Note")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField()
     favorites = models.IntegerField()

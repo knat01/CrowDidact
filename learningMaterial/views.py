@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from .models import Subject
+from django.http import HttpResponse
 
-# Create your views here.
+subDummy = Subject.objects.all().first()
+
+def subject(request):
+    return render(request,"learningMaterial/subjectBase",{subject:subDummy})
+
