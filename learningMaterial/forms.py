@@ -4,7 +4,7 @@ from .models import LectureNote, Subject
 class uploadNoteForm(ModelForm):
     class Meta:
         model = LectureNote
-        fields = ['title','image','subject','author','favorites']
+        fields = ['title','image','subject']
 
 
 class createSubjectForm(ModelForm):
