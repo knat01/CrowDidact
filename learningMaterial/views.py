@@ -18,8 +18,8 @@ def upload(request):
         form = uploadNoteForm(request.POST, request.FILES, request.user)
         
         if form.is_valid():
-            form.save()
-            
+            obj = LectureNote(image=form.cleaned_data["image"],subject = form.cleaned_data["subject"],favorites=0,title=form.cleaned_data["title"],author=request.user)
+            obj.save()
             
             return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data["subject"].name.split(' ', 1)[0]]))
         
