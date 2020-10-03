@@ -17,8 +17,14 @@ from django.contrib import admin
 from django.urls import include, path
 from learningMaterial import urls as learning_urls
 from learningMaterial import views as learning_views
+from . import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('learningMaterial/', include(learning_urls))
 ]
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
