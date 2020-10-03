@@ -11,8 +11,13 @@
     <p>{{ subject.name }}</p>
     <p>{{ subject.blurb.first.blurbText }}</p>
 
-    <img src="{{ subject.lecturenote_set.first.image.url }}"></img>
 
+    {% for video in subject.youtubevideo_set.all %}
+    <iframe width="963" height="722" src="{{ video.link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% endfor %}
+    {% for note in subject.lecturenote_set.all %}
+    <img src="{{ note.image.url }}"></img>
+    {% endfor %}
 </body>
 
 </html>

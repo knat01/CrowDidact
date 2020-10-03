@@ -14,7 +14,7 @@ class Blurb(models.Model):
     fromLink = models.URLField(max_length=600)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="blurb")
     def __str__(self):
-        return self.subject
+        return self.subject.name
 
 class YoutubeVideo(models.Model):
     link = models.URLField(max_length=600)
