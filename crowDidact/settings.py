@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 Django settings for crowDidact project.
 
@@ -125,7 +125,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-=======
 """
 Django settings for crowDidact project.
 
@@ -252,5 +251,4 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
->>>>>>> 4bff61d89d9cce8713ec1b06cbf243ff008e06d8
 #A
