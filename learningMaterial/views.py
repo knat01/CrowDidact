@@ -16,8 +16,8 @@ def upload(request):
         form = uploadNoteForm(request.POST, request.FILES, request.user)
         
         if form.is_valid():
-            new = LectureNote(request.FILES['image'],form.subject,form.favorites,form.title,form.author)
-            new.save()
+            form.save()
+            
             
             return HttpResponseRedirect("learningMaterials")
         
