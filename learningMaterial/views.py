@@ -5,5 +5,5 @@ from django.http import HttpResponse
 subDummy = Subject.objects.all().first()
 
 def subject(request):
-    return render(request,"learningMaterial/subjectBase",{subject:subDummy})
+    return render(request,"subjectBase.html",{subject:subDummy})
 
