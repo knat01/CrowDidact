@@ -5,10 +5,12 @@ from .forms import uploadNoteForm
 from django.http import HttpResponseRedirect
 
 
-subDummy = Subject.objects.all().first()
+sub = Subject.objects.all().first()
 
-def subject(request):
-    return render(request,"subjectBase.html",{"subject":subDummy})
+def subject(request, subjectStr):
+    if subjectStr:
+        sub = Subject.objects.get(name__icontains=subjectStr)
+    return render(request,"subjectBase.html",{"subject":sub})
 
 def upload(request):
 
