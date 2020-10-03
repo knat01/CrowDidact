@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from .models import Subject, LectureNote
 from django.http import HttpResponse
-from .forms import uploadNoteForm
+from .forms import uploadNoteForm, createSubjectForm
 from django.http import HttpResponseRedirect
-
+from django.urls import reverse
 
 sub = Subject.objects.all().first()
 
@@ -21,7 +21,7 @@ def upload(request):
             form.save()
             
             
-            return HttpResponseRedirect("learningMaterials")
+            return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data["subject"].name.split(' ', 1)[0]]))
         
     else:
         form = uploadNoteForm()
@@ -30,4 +30,23 @@ def upload(request):
         'form':form
     }
 
-    return render(request,"./uploadNote.html",context)
+    return render(request,"./form.html",context)
+
+def newSubject(request):
+    if request.method == "POST":
+        form = createSubjectForm(request.POST, request.user)
+        
+        if form.is_valid():
+            form.save()
+            
+            
+            return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data['name']]))
+        
+    else:
+        form = createSubjectForm()
+
+    context = {
+        'form':form
+    }
+
+    return render(request,"./form.html",context)
