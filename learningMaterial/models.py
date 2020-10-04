@@ -9,6 +9,9 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
+    def humanRead(self):
+        return self.name.replace('_', ' ')
+
 class Blurb(models.Model):
     blurbText = models.TextField(max_length=5000)
     fromLink = models.URLField(max_length=600)
@@ -32,4 +35,7 @@ class LectureNote(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.image.url
+        return self.title
+
+    def humanRead(self):
+        return self.title.replace('_', ' ')
