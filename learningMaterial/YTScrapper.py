@@ -26,9 +26,7 @@ def YTScrape (Topic, AMT):
 
 
     for item in response['items']:
-        print('')
-        print('Video name: '+ item['snippet']['title'])
-        print('Embed url: '+ 'https://www.youtube.com/embed/'+item['id']['videoId'])
-        print('')
+
+        print('https://www.youtube.com/embed/'+item['id']['videoId'])
     #output
 
