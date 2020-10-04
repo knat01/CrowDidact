@@ -24,9 +24,15 @@ def YTScrape (Topic, AMT):
     response = request.execute()
     #return response from API server
 
+    videos = []
 
     for item in response['items']:
+        videos.append(
+            {   'title':item['snippet']['title'],
+                'url': 'https://www.youtube.com/embed/'+item['id']['videoId']
+            }
+        )
+        
+    return videos
 
-        print('https://www.youtube.com/embed/'+item['id']['videoId'])
-    #output
 
