@@ -47,8 +47,10 @@
   }
 
   .margin {
-    margin-left: 35px;
-    margin-right: 35px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 4%;
+    margin-bottom: 1.5%;
   }
 
   .contentbox {
@@ -161,90 +163,51 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <main>
-    <article style="padding-top: 4%;">
-      <h1 style="margin-left: 1%;">Discrete Matter</h1>
-
-      <p style="margin-left: 3%;">
-        Blurb text.
-        Blurb text.Blurb text.Blurb text.Blurb text.Blurb text.Blurb text.Blurb text.
-        Blurb text.
-        Blurb text.Blurb text.
-        Blurb text.Blurb text.Blurb text.Blurb text.Blurb text.
-
-        Blurb text.Blurb text.
-      </p>
-
-    </article>
-    <h2 class="margin">Lectures</h2>
+    
+    
 
 
     <div class="container-fluid">
       <div class="w-75 p-3" style="margin-left: auto; margin-right: auto;">
+
+        <article style="padding-top: 4%;">
+          <h1 style="margin-left: 1%;">{{ subject.humanRead }}</h1>
+    
+          <p style="margin-left: 3%;">
+            {{ subject.blurb.first.blurbText }}
+          </p>
+    
+        </article>
+
+        <h2 class="margin">Lectures</h2>
         <div class="horizontalScrollable">
           <div class="row flex-row flex-nowrap">
+
+            {% for video in subject.youtubevideo_set.all %}
             <div class="col-sm-6">
-              <iframe width="963" height="722" src="https://www.youtube.com/embed/OUj4j6td1es" frameborder="0"
+              <iframe width = "530" height = "300" src="{{video.link}}" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
             </div>
-            <div class="col-sm-6">
-              <iframe width="963" height="722" src="https://www.youtube.com/embed/OUj4j6td1es" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="col-sm-6">
-              <iframe width="963" height="722" src="https://www.youtube.com/embed/OUj4j6td1es" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-            <div class="col-sm-6">
-              <iframe width="963" height="722" src="https://www.youtube.com/embed/OUj4j6td1es" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
+            {% endfor %}
           </div>
         </div>
-
+        <br/>
+        <h2 class="margin">Notes</h2>
         <div class="row">
-          <div class="col-sm-4" style="margin-top:4%; margin-bottom: 2%;">
-            <a href="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-              <span class="helper"></span><img
-                src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-            </a>
-            <br />
-            <button class="btn btn-primary">Like</button>
-            Lecture note title
-          </div>
 
-          <div class="col-sm-4" style="margin-top:4%; margin-bottom: 2%;">
-            <a href="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-              <span class="helper"></span><img
-                src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-            </a>
-            <br />
-            <button class="btn btn-primary">Like</button>
-            Lecture note title
-          </div>
+          {% for note in subject.lecturenote_set.all %}
+            <div class="col-sm-4" style="margin-top:4%; margin-bottom: 2%;">
+              <a href="../../notes/{{ note.title }}">
+                <span class="helper"></span><img
+                  src="{{ note.image.url }}">
+              </a>
+              <br />
+              <button class="btn btn-primary">Like</button>
+              Lecture note title
+            </div>
 
-          <div class="col-sm-4" style="margin-top:4%; margin-bottom: 2%;">
-            <a href="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-              <span class="helper"></span><img
-                src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-            </a>
-            <br />
-            <button class="btn btn-primary">Like</button>
-            Lecture note title
-          </div>
-
-          <div class="col-sm-4" style="margin-top:4%; margin-bottom: 2%;">
-            <a href="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-              <span class="helper"></span><img
-                src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png">
-            </a>
-            <br />
-            <button class="btn btn-primary">Like</button>
-            Lecture note title
-          </div>
+          {% endfor %}
 
 
 
