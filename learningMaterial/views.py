@@ -12,6 +12,10 @@ def subject(request, subjectStr):
         sub = Subject.objects.get(name__icontains=subjectStr)
     return render(request,"subjectBase.html",{"subject":sub})
 
+def note(request, noteStr):
+    note = LectureNote.objects.get(title__iexact=noteStr)
+    return render(request,"note.html",{"note":note})
+
 def upload(request):
 
     if request.method == "POST":
