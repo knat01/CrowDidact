@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z _]*$', 'Only alphanumeric, spaces, and underscores may be included')
+
 class Subject(models.Model):
-    name = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=150, unique=True, validators=[alphanumeric])
 
     def __str__(self):
         return self.name
@@ -28,7 +31,7 @@ class YoutubeVideo(models.Model):
         return self.link
 
 class LectureNote(models.Model):
-    title = models.CharField(max_length=80,default="Note",blank=True,null=True,unique=True)
+    title = models.CharField(max_length=80,default="Note",blank=True,null=True,unique=True,validators=[alphanumeric])
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField()
     favorites = models.IntegerField(default=0)
