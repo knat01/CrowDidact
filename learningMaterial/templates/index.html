@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<br/>
+    <h1>Our Subjects</h1>
+    <br/>
+
+<div class="row">
+
+    
+
+    {% for subject in subs %}
+    <div class="col-sm-4 d-flex justify-content-center" style="padding-top: 3%; padding-bottom: 3%; outline: 2px solid #ccc; justify-content: center;">
+        <h2><a href="/subjects/{{subject.name}}">{{ subject.humanRead }}</a></h2>
+    </div>
+
+    {% endfor %}
+
+
+
+
+</div>
+
+
+{% endblock content %}
