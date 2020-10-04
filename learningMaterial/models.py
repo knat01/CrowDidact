@@ -16,8 +16,8 @@ class Subject(models.Model):
         return self.name.replace('_', ' ')
 
 class Blurb(models.Model):
-    blurbText = models.TextField(max_length=5000)
-    fromLink = models.URLField(max_length=600)
+    blurbText = models.TextField(max_length=50000)
+    fromLink = models.URLField(max_length=600, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="blurb")
     def __str__(self):
         return self.subject.name
