@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .models import Subject, LectureNote
+from .models import Subject, LectureNote, YoutubeVideo
 from django.http import HttpResponse
 from .forms import uploadNoteForm, createSubjectForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .YTScrapper import YTScrape
 
 sub = Subject.objects.all().first()
 
@@ -43,10 +44,23 @@ def newSubject(request):
         
         if form.is_valid():
 
-            obj = Subject(form.cleaned_data["name"].replace(" ","_"))
+            obj = Subject(name=form.cleaned_data["name"].replace(" ","_"))
             obj.save()
             
+            vidUrls = []
+
+            for video in YTScrape(form.cleaned_data["name"] + "lecture","8"):
+                if(video["url"] not in vidUrls):
+                    vidUrls.append(video["url"])
+                    lec = YoutubeVideo(subject=obj,link=video["url"], favorites=0)
+                    lec.save()
             
+            for video in YTScrape(form.cleaned_data["name"] + "course","6"):
+                if(video["url"] not in vidUrls):
+                    vidUrls.append(video["url"])
+                    lec = YoutubeVideo(subject=obj,link=video["url"], favorites=0)
+                    lec.save()
+
             return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data['name']]))
         
     else:
