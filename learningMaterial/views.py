@@ -12,8 +12,11 @@ sub = Subject.objects.all().first()
 
 def subject(request, subjectStr):
     if subjectStr:
-        sub = Subject.objects.get(name__icontains=subjectStr)
+        sub = Subject.objects.get(name__iexact=subjectStr)
     return render(request,"subject.html",{"subject":sub})
+
+def index(request):
+    return render(request,'index.html',{"subs":Subject.objects.all})
 
 def note(request, noteStr):
     note = LectureNote.objects.get(title__iexact=noteStr)
@@ -31,7 +34,7 @@ def upload(request):
             
             
 
-            return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data["subject"].name.split(' ', 1)[0]]))
+            return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data["subject"].name.replace(' ','_')]))
         
     else:
         form = uploadNoteForm()
@@ -68,7 +71,7 @@ def newSubject(request):
                     lec = YoutubeVideo(subject=obj,link=video["url"], favorites=0)
                     lec.save()
 
-            return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data['name']]))
+            return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data['name'].replace(' ','_')]))
         
     else:
         form = createSubjectForm()
