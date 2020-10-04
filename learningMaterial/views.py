@@ -22,7 +22,8 @@ def upload(request):
         form = uploadNoteForm(request.POST, request.FILES, request.user)
         
         if form.is_valid():
-            obj = LectureNote(image=form.cleaned_data["image"],subject = form.cleaned_data["subject"],favorites=0,title=form.cleaned_data["title"],author=request.user)
+            newTitle = form.cleaned_data["title"].replace(" ","_")
+            obj = LectureNote(image=form.cleaned_data["image"],subject = form.cleaned_data["subject"],favorites=0,title=newTitle,author=request.user)
             obj.save()
             
             return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data["subject"].name.split(' ', 1)[0]]))
@@ -41,7 +42,9 @@ def newSubject(request):
         form = createSubjectForm(request.POST, request.user)
         
         if form.is_valid():
-            form.save()
+
+            obj = Subject(form.cleaned_data["name"].replace(" ","_"))
+            obj.save()
             
             
             return HttpResponseRedirect(reverse(subject, args=[form.cleaned_data['name']]))

@@ -28,7 +28,7 @@ class YoutubeVideo(models.Model):
         return self.link
 
 class LectureNote(models.Model):
-    title = models.CharField(max_length=80,default="Note",blank=True,null=True)
+    title = models.CharField(max_length=80,default="Note",blank=True,null=True,unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField()
     favorites = models.IntegerField(default=0)
